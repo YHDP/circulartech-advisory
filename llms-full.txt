@@ -31,6 +31,8 @@ Repair, resale and take-back models that the passport data makes possible, with 
 
 Advice for sector-specific questions that do not fit a standard package.
 
+[What each service delivers](/services.html)
+
 Insights
 
 ## Latest analysis
@@ -60,6 +62,92 @@ Whether you're preparing for mandatory DPPs, evaluating circular investments or 
 consulting@circulartechforum.de
 
 or [open in your mail app](mailto:consulting@circulartechforum.de?subject=DPP%20Consulting%20Request)
+
+---
+
+## Services (https://www.circulartechadvisory.com/services.html)
+
+## DPP Readiness Assessment
+
+A readiness assessment answers three questions: which passport rules apply to your products and from when, which of the required data you already hold, and which of your systems would have to host, protect and register the passport.
+
+### What you get
+
+- The regulations and delegated acts that apply to each of your product groups, with their dates
+
+- A gap table of the required data points against the data you hold today, and who holds the rest
+
+- A check of your systems: hosting, access to the protected part, and registration
+
+- The first three steps, in order
+
+**A good fit when** you know a passport is coming but not yet what it asks of you.
+
+## Compliance Roadmapping
+
+The roadmap puts the passport work in order against your deadline, with an owner for each step.
+
+### What you get
+
+- The steps from verification with a qualified seal to the first registration, in the order they depend on each other
+
+- Data collection with your suppliers: what to ask whom, and by when
+
+- The decisions you have to take first, such as build or buy
+
+- A timeline your management can sign off
+
+**A good fit when** your deadline is fixed, as it is for batteries on 18 February 2027, or the readiness assessment is done.
+
+## DPP Design & Implementation
+
+We design the passport with your IT team or your passport provider and stay through the build, until a passport passes the Registry's checks.
+
+### What you get
+
+- A data model mapped to the Commission's semantic model where one is published
+
+- Hosting and access design: the public part, the protected part and who may see what
+
+- Validation against the published JSON Schemas and SHACL shapes
+
+- Registration through the web interface or the API, and help choosing a provider if you buy
+
+**A good fit when** you are building a passport system or choosing who builds it.
+
+## Circular Business Value
+
+Passport data makes repair, resale and take-back easier to run. We work out which of those models pay off for your products.
+
+### What you get
+
+- The circular models that fit your product and your market
+
+- The passport data each model needs, and what you already collect for compliance
+
+- A business case per model, with the assumptions written out
+
+**A good fit when** you want the passport to earn something back, not only to tick a box.
+
+## Custom Consulting
+
+Some questions do not fit a package: a sector-specific rule, a passport requirement in a tender, a data dispute with a supplier, or a second opinion on a provider's offer.
+
+### What you get
+
+- A scoped answer to your question, with the sources behind it
+
+- A short call to walk through it with your team
+
+**A good fit when** you have one concrete question and want a clear answer.
+
+## Not sure where to start?
+
+Tell us what you make and where your data lives today. We tell you which service fits, or whether you need us at all.
+
+consulting@circulartechforum.de
+
+or [open in your mail app](mailto:consulting@circulartechforum.de?subject=DPP%20services)
 
 ---
 

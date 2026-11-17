@@ -6,6 +6,7 @@ Contact: consulting@circulartechforum.de. Language: English. Full text of this s
 
 ## Pages
 - [Home](https://www.circulartechadvisory.com/): services, short answers on what a DPP is and which products need one, and how to get in touch
+- [Services](https://www.circulartechadvisory.com/services.html): the five services in detail, what each delivers and when it fits
 - [Insights](https://www.circulartechadvisory.com/insights/): analysis of EU DPP rules and what to build when
 
 ## Insights

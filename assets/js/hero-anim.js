@@ -1,6 +1,5 @@
 // Hero animation for CircularTech Advisory. Fills every .ctf-hero__art[data-anim] with a canvas.
-//   data-anim="loop"  : the passport loop (lab candidate c6, provisional): a product travels the loop and each
-//                       lifecycle station writes a row into the passport. Below 900px wide: drift only.
+//   data-anim="loop"  : the passport is the loop (locked lab candidate c8). Below 900px wide: drift only.
 //   data-anim="drift" : soft colour fields drifting behind the copy (lab candidate c4).
 // Each scene is a pure function of time, so reduced motion shows one still frame. Pauses off-screen and in a
 // hidden tab. No network, no libraries.
@@ -42,52 +41,80 @@
     return { pts: pts, x0: x0, y0: y0, cw: cw, ch: ch, g: g };
   }
 
+  // Point at fraction s along a rounded rectangle, clockwise from the top-left corner.
+  function rrPoint(x, y, w, h, r, s) {
+    var segs = [w - 2 * r, Math.PI * r / 2, h - 2 * r, Math.PI * r / 2, w - 2 * r, Math.PI * r / 2, h - 2 * r, Math.PI * r / 2];
+    var tot = segs.reduce(function (a, b) { return a + b; }, 0), d = (((s % 1) + 1) % 1) * tot, i = 0;
+    while (d > segs[i] && i < 7) { d -= segs[i]; i++; }
+    function arc(cx, cy, a0) { var a = a0 + d / r; return [cx + Math.cos(a) * r, cy + Math.sin(a) * r]; }
+    switch (i) {
+      case 0: return [x + r + d, y];          case 1: return arc(x + w - r, y + r, -Math.PI / 2);
+      case 2: return [x + w, y + r + d];      case 3: return arc(x + w - r, y + h - r, 0);
+      case 4: return [x + w - r - d, y + h];  case 5: return arc(x + r, y + h - r, Math.PI / 2);
+      case 6: return [x, y + h - r - d];      default: return arc(x + r, y + r, Math.PI);
+    }
+  }
+  var LANE_COLS = ["#A7F6AA", "#87E1CB", "#66CCEC", "#87E1CB"];
+  var LANE_SPEED = [.034, .021, .013, .008];                 // inner lane fastest, outer slowest
+
   var SCENES = {
     drift: { staticT: 12, layout: function () { return {}; }, draw: function (ctx, w, h, t) { drift(ctx, w, h, t, 1); } },
 
+    // Locked lab candidate c8 "The loop feeds the passport" (round 3, 2026-11-17). Material runs on four lanes
+    // around the passport outline at different speeds, with comet tails; data peels off the outer lane in curves
+    // into the fields and the loop closes as the passport fills; at the end the data returns to the loop.
     loop: {
-      staticT: 12.3,
+      staticT: 13.6,
       layout: function (w, h) {
         if (w < 900) return { off: true };
-        var r = rng(9), cx = w * .79, cy = h * .52, R = Math.min(h * .36, w * .15), cw = R * .82;
-        var P = passport(cx - cw / 2, cy - cw * .66, cw, r, [14, 10, 13, 9]);
-        P.pts.forEach(function (q) { q.d = r() * .5; });
-        var st = [0, 1, 2, 3].map(function (s) { return -Math.PI / 2 + 2 * Math.PI * (s + .5) / 4; });
-        var flow = [];
-        for (var i = 0; i < 60; i++) flow.push({ s: r(), v: .03 + r() * .02, ring: r() < .5 ? 0 : 1 });
-        return { P: P, cx: cx, cy: cy, R: R, st: st, flow: flow };
+        var r = rng(21), cw = Math.min(w * .2, h * .44);
+        var P = passport(w * .78 - cw / 2, h * .52 - cw * .66, cw, r, [16, 11, 14, 9, 13]);
+        P.pts.forEach(function (q) { q.d = r(); q.s0 = r(); });
+        var lanes = [0, 1, 2, 3].map(function (i) {
+          var dots = [];
+          for (var k = 0; k < 30 + i * 6; k++) dots.push({ s: r(), a: .35 + r() * .5 });
+          return { inset: -i * P.g * 1.05, col: LANE_COLS[i], v: LANE_SPEED[i], dots: dots };
+        });
+        return { P: P, lanes: lanes };
       },
       draw: function (ctx, w, h, t, L) {
         drift(ctx, w, h, t, .7);
         if (L.off) return;
-        var P = L.P, cx = L.cx, cy = L.cy, R = L.R, st = L.st, p = t % 14;
-        var fade = p < 12.6 ? 1 : 1 - ease((p - 12.6) / 1.2), lap = Math.min(1, p / 12);
-        ctx.lineWidth = 1.2; ctx.strokeStyle = "#87E1CB";
-        [R, R * 1.08].forEach(function (rr) { ctx.globalAlpha = .2; ctx.beginPath(); ctx.arc(cx, cy, rr, 0, 7); ctx.stroke(); });
-        L.flow.forEach(function (d) {
-          var a = 2 * Math.PI * ((d.s + t * d.v) % 1), rr = d.ring ? R * 1.08 : R;
-          ctx.globalAlpha = .55; ctx.fillStyle = d.ring ? "#66CCEC" : "#A7F6AA"; dot(ctx, cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, 1.5);
+        var P = L.P, g = P.g, p = t % 18;
+        var fill = p < 3 ? 0 : p < 9 ? ease((p - 3) / 6) : p < 15 ? 1 : 1 - ease((p - 15) / 3);
+        var span = .74 + .26 * fill;
+        function lanePt(ln, s) { return rrPoint(P.x0 + ln.inset, P.y0 + ln.inset, P.cw - 2 * ln.inset, P.ch - 2 * ln.inset, g * 1.2 - ln.inset, s); }
+        function start(i) { return .08 + t * .004 * (i % 2 ? -1 : 1); }
+        L.lanes.forEach(function (ln, i) {
+          var a0 = start(i), k;
+          ctx.strokeStyle = ln.col; ctx.lineWidth = 1.2; ctx.globalAlpha = .14 + .14 * fill; ctx.beginPath();
+          for (k = 0; k <= 140; k++) { var q = lanePt(ln, a0 + span * k / 140); if (k) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+          ctx.stroke();
+          ctx.fillStyle = ln.col;
+          ln.dots.forEach(function (d) {
+            var s = (d.s + t * ln.v) % 1, fadeEnd = fill > .98 ? 1 : Math.min(1, (1 - s) * 6), j;
+            for (j = 1; j <= 6; j++) {                                   // comet tail
+              var sj = s - j * ln.v * .09; if (sj < 0) break;
+              var tq = lanePt(ln, a0 + sj * span); ctx.globalAlpha = d.a * fadeEnd * (1 - j / 7) * .5; dot(ctx, tq[0], tq[1], 1.5 * (1 - j / 9));
+            }
+            var q2 = lanePt(ln, a0 + s * span); ctx.globalAlpha = d.a * fadeEnd; dot(ctx, q2[0], q2[1], 1.7);
+          });
+          if (fill < .98) { var e = lanePt(ln, a0 + span); ctx.globalAlpha = .85 * (1 - fill); ctx.fillStyle = "#D4922A"; dot(ctx, e[0], e[1], 2.8); }
         });
-        st.forEach(function (a, s) {
-          var passed = lap * 4 > s + .5;
-          ctx.globalAlpha = passed ? .9 : .35; ctx.fillStyle = "#87E1CB"; dot(ctx, cx + Math.cos(a) * R, cy + Math.sin(a) * R, passed ? 4 : 3);
-        });
-        ctx.globalAlpha = .35 * fade; ctx.strokeStyle = "#87E1CB"; ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(P.x0, P.y0, P.cw, P.ch, P.g * 1.2); else ctx.rect(P.x0, P.y0, P.cw, P.ch);
-        ctx.stroke();
+        var outer = L.lanes[3];
         P.pts.forEach(function (q) {
-          var k, sx = q.x, sy = q.y;
-          if (q.row === -1) k = 1;
-          else if (q.row === 99) k = ease((p - 11.4 - q.d) / .8);
-          else { k = ease((p - 12 * (q.row + .5) / 4 - q.d) / 1.1); sx = cx + Math.cos(st[q.row]) * R; sy = cy + Math.sin(st[q.row]) * R; }
+          var isQR = q.row === 99, k;
+          if (isQR) k = fill > .5 ? ease((fill - .5) * 2 - q.d * .5) : 0;
+          else { var st = 3 + q.d * 5; k = p < 15 ? ease((p - st) / 1.3) : 1 - ease((p - 15 - q.d * 1.5) / 1.4); }
           if (k <= 0) return;
-          ctx.globalAlpha = (q.row === 99 ? k : .5 + .45 * k) * fade; ctx.fillStyle = q.c;
-          dot(ctx, sx + (q.x - sx) * k, sy + (q.y - sy) * k, 1.6);
+          if (isQR || k >= 1) { ctx.globalAlpha = .9 * Math.min(1, k); ctx.fillStyle = q.c; dot(ctx, q.x, q.y, 1.6); return; }
+          var sp = lanePt(outer, start(3) + q.s0 * span), sx = sp[0], sy = sp[1];
+          var cx = (sx + q.x) / 2 + (sy - q.y) * .25, cy = (sy + q.y) / 2 + (q.x - sx) * .25;   // curved flight
+          function pos(kk) { var u = 1 - kk; return [u * u * sx + 2 * u * kk * cx + kk * kk * q.x, u * u * sy + 2 * u * kk * cy + kk * kk * q.y]; }
+          ctx.fillStyle = q.c;
+          for (var j = 1; j <= 5; j++) { var pj = pos(Math.max(0, k - j * .035)); ctx.globalAlpha = .4 * (1 - j / 6); dot(ctx, pj[0], pj[1], 1.3); }
+          var pk = pos(k); ctx.globalAlpha = .55 + .4 * k; ctx.fillStyle = q.row === -1 ? "#D4922A" : q.c; dot(ctx, pk[0], pk[1], 1.8);
         });
-        if (p < 12) {
-          var a = -Math.PI / 2 + 2 * Math.PI * lap;
-          ctx.globalAlpha = 1; ctx.fillStyle = "#D4922A"; dot(ctx, cx + Math.cos(a) * R, cy + Math.sin(a) * R, 4.5);
-        }
         ctx.globalAlpha = 1;
       },
     },

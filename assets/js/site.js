@@ -52,3 +52,55 @@
     el.textContent = String(new Date().getFullYear());
   });
 })();
+
+/* Site navigation, after the Regen Studio nav.js: scrolled state, desktop Menu dropdown,
+   Get-in-touch popover, and the phone slide-in panel. Escape and outside clicks close everything. */
+(function () {
+  var nav = document.getElementById('nav');
+  if (!nav) return;
+
+  function onScroll() { nav.classList.toggle('ctf-nav--scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var pairs = [];
+  function pair(btn, panel, onOpen, onClose) {
+    if (!btn || !panel) return;
+    var p = { btn: btn, panel: panel, onOpen: onOpen, onClose: onClose };
+    pairs.push(p);
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !panel.classList.contains('is-open');
+      closeAll(p);
+      set(p, open);
+    });
+  }
+  function set(p, open) {
+    p.panel.classList.toggle('is-open', open);
+    p.btn.setAttribute('aria-expanded', String(open));
+    if (open && p.onOpen) p.onOpen();
+    if (!open && p.onClose) p.onClose();
+  }
+  function closeAll(except) {
+    pairs.forEach(function (p) { if (p !== except && p.panel.classList.contains('is-open')) set(p, false); });
+  }
+
+  pair(nav.querySelector('.ctf-nav__menu-btn'), document.getElementById('navDropdown'));
+  pair(nav.querySelector('.ctf-nav__contact-btn'), document.getElementById('navContact'));
+  pair(document.getElementById('navToggle'), document.getElementById('navLinks'),
+    function () { document.body.classList.add('nav-open'); },
+    function () { document.body.classList.remove('nav-open'); });
+
+  document.addEventListener('click', function (e) {
+    pairs.forEach(function (p) {
+      if (p.panel.classList.contains('is-open') && !p.panel.contains(e.target)) set(p, false);
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    pairs.forEach(function (p) { if (p.panel.classList.contains('is-open')) { set(p, false); p.btn.focus(); } });
+  });
+  nav.querySelectorAll('.ctf-nav__dropdown a, .ctf-nav__links a').forEach(function (a) {
+    a.addEventListener('click', function () { closeAll(null); });
+  });
+})();

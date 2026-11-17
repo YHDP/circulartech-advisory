@@ -26,7 +26,7 @@ const OG_DEFAULT = `${SITE_URL}/assets/images/og-default.png`;
 // Impressum and Datenschutz go live (linked, indexed, in the sitemap) only once the partner
 // has confirmed the company details. Until then they stay noindex and unlinked.
 const LEGAL_CONFIRMED = false;
-const STATIC_PAGES = ["index.html", "impressum.html", "datenschutz.html", "404.html"];
+const STATIC_PAGES = ["index.html", "services.html", "products.html", "impressum.html", "datenschutz.html", "404.html"];
 const BLOG_DIR = "Blogs";
 const OUT_DIR = "insights";
 
@@ -108,15 +108,47 @@ function toMarkdown(html: string): string {
 }
 
 // ── Shared partials ─────────────────────────────────────────────────────────
-function bar(active: "home" | "insights" | ""): string {
+type Active = "home" | "services" | "products" | "insights" | "";
+// Site navigation, after the Regen Studio nav: fixed bar, "Menu" dropdown and "Get in touch" popover on
+// desktop, hamburger with a slide-in panel on phones. The forum link lives only in this menu.
+function bar(active: Active): string {
   const cur = (k: string) => (active === k ? ' aria-current="page"' : "");
-  return `    <div class="ctf-bar">
-      <a class="ctf-bar__logo" href="/"${cur("home")}><img src="/assets/logo.svg" alt="${SITE_NAME}" width="87" height="76"></a>
-      <nav class="ctf-bar__links" aria-label="Site">
-        <a href="/insights/"${cur("insights")}>Insights</a>
-        <a href="${FORUM_URL}" rel="noopener">circulartechforum.de &rarr;</a>
-      </nav>
-    </div>`;
+  const soon = `<span class="ctf-nav__soon">Soon</span>`;
+  const links = (cls: string) => `<a href="/services.html"${cur("services")}>Services</a>
+        <a href="/products.html"${cur("products")}>Products ${soon}</a>
+        <a href="/${OUT_DIR}/"${cur("insights")}>Insights</a>
+        <span class="ctf-nav__sep${cls}" aria-hidden="true"></span>
+        <a href="${FORUM_URL}" rel="noopener">CircularTech Forum <span aria-hidden="true">&#8599;</span></a>`;
+  const copy = `<button class="ctf-btn ctf-btn--primary" type="button" data-copy aria-describedby="copy-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span class="ctf-btn__label">${EMAIL}</span>
+          </button>
+          <a class="ctf-contact__alt" href="mailto:${EMAIL}?subject=DPP%20Consulting%20Request">or open in mail app</a>`;
+  return `<nav class="ctf-nav" id="nav" aria-label="Site">
+  <div class="ctf-inner ctf-nav__inner">
+    <a class="ctf-nav__logo" href="/"${cur("home")}><img src="/assets/logo.svg" alt="${SITE_NAME} home" width="87" height="76"></a>
+    <div class="ctf-nav__links" id="navLinks">
+        ${links(" ctf-nav__sep--mobile")}
+        <div class="ctf-nav__links-contact">
+          ${copy}
+        </div>
+    </div>
+    <div class="ctf-nav__actions">
+      <button class="ctf-nav__menu-btn" type="button" aria-expanded="false" aria-controls="navDropdown">Menu <span class="ctf-nav__arrow" aria-hidden="true">&#9662;</span></button>
+      <div class="ctf-nav__dropdown" id="navDropdown">
+        ${links("")}
+      </div>
+      <div class="ctf-nav__contact">
+        <button class="ctf-nav__contact-btn" type="button" aria-expanded="false" aria-controls="navContact">Get in touch</button>
+        <div class="ctf-nav__popover" id="navContact" role="dialog" aria-label="Contact options">
+          <p>Tell us what you make and where your passport data lives today.</p>
+          ${copy}
+        </div>
+      </div>
+      <button class="ctf-nav__toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>`;
 }
 
 function footer(): string {
@@ -127,9 +159,9 @@ function footer(): string {
   <div class="ctf-inner">
     <p>&copy; <span data-year>${today.slice(0, 4)}</span> ${LEGAL_NAME}</p>
     <nav aria-label="Footer">
+      <a href="/services.html">Services</a>
       <a href="/insights/">Insights</a>
       <a href="/feed.xml">RSS</a>
-      <a href="${FORUM_URL}" rel="noopener">CircularTech Forum</a>
       ${legal}
     </nav>
   </div>
@@ -309,10 +341,10 @@ ${head({ title: `${p.seoTitle || p.title} | ${SITE_NAME}`, description: desc, ur
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
+${bar("insights")}
 
 <header class="ctf-hero ctf-hero--compact ctf-hero--post">
   <div class="ctf-inner">
-${bar("insights")}
     <div class="ctf-post-header">
       <a class="ctf-post-header__back" href="/${OUT_DIR}/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Insights</a>
       ${(p.categories || []).length ? `<div class="ctf-post-header__categories">${p.categories!.map((c) => `<span class="ctf-post-header__category">${esc(c)}</span>`).join("")}</div>` : ""}
@@ -386,11 +418,11 @@ ${head({ title: `Insights | ${SITE_NAME}`, description: desc, url, type: "websit
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
+${bar("insights")}
 
 <header class="ctf-hero ctf-hero--compact">
   <div class="ctf-hero__art" data-anim="drift" aria-hidden="true"></div>
   <div class="ctf-inner">
-${bar("insights")}
     <div class="ctf-hero__body">
       <p class="ctf-hero__pre">Insights</p>
       <h1 class="ctf-hero__h1">What the passport rules <span>ask of you, and when</span></h1>
@@ -419,6 +451,7 @@ function sitemap(posts: Post[]): string {
   const latest = posts[0] ? (posts[0].updated || posts[0].date) : today;
   const urls: { loc: string; lastmod: string }[] = [
     { loc: `${SITE_URL}/`, lastmod: today },
+    { loc: `${SITE_URL}/services.html`, lastmod: today },
     { loc: `${SITE_URL}/${OUT_DIR}/`, lastmod: latest },
     ...posts.map((p) => ({ loc: postUrl(p), lastmod: p.updated || p.date })),
   ];
@@ -477,8 +510,8 @@ Sitemap: ${SITE_URL}/feed.xml
 `;
 }
 
-function landerText(): string {
-  const html = read("index.html");
+function pageText(file = "index.html"): string {
+  const html = read(file);
   const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] || "";
   // drop the generated "latest" strip; posts are listed separately
   return toMarkdown(main.replace(/<!--SITE:LATEST-->[\s\S]*?<!--\/SITE:LATEST-->/, ""));
@@ -493,6 +526,7 @@ Contact: ${EMAIL}. Language: English. Full text of this site for language models
 
 ## Pages
 - [Home](${SITE_URL}/): services, short answers on what a DPP is and which products need one, and how to get in touch
+- [Services](${SITE_URL}/services.html): the five services in detail, what each delivers and when it fits
 - [Insights](${SITE_URL}/${OUT_DIR}/): analysis of EU DPP rules and what to build when
 ${LEGAL_CONFIRMED ? `- [Impressum](${SITE_URL}/impressum.html): legal notice (German)\n- [Datenschutz](${SITE_URL}/datenschutz.html): privacy notice (German)\n` : ""}
 ## Insights
@@ -506,7 +540,8 @@ ${posts.length ? posts.map((p) => `- [${p.title}](${postUrl(p)}) (${p.date}): ${
 function llmsFull(posts: Post[]): string {
   const parts = [
     `# ${SITE_NAME}: full text\n\n> Plain-text version of ${SITE_URL} for language models. Source of truth is the website; quote with a link to the page.\n`,
-    `## Home (${SITE_URL}/)\n\n${landerText()}`,
+    `## Home (${SITE_URL}/)\n\n${pageText()}`,
+    `## Services (${SITE_URL}/services.html)\n\n${pageText("services.html")}`,
     ...posts.map((p) => `## ${p.title}\n\nURL: ${postUrl(p)}\nAuthor: ${p.author.name}${p.author.role ? ", " + p.author.role : ""}\nPublished: ${p.date}${p.updated ? `\nUpdated: ${p.updated}` : ""}\n\n${p.subtitle ? p.subtitle + "\n\n" : ""}${toMarkdown(p.content).replace(/^## /gm, "### ").replace(/^### (?=###)/gm, "#")}`),
   ];
   return parts.join("\n\n---\n\n") + "\n";
@@ -517,7 +552,8 @@ function updateStaticPages(posts: Post[]) {
   for (const file of STATIC_PAGES) {
     if (!exists(file)) { console.warn(`  ! ${file} missing`); continue; }
     let html = read(file);
-    html = replaceBlock(html, "BAR", bar(file === "index.html" ? "home" : ""), file);
+    const active: Active = file === "index.html" ? "home" : file === "services.html" ? "services" : file === "products.html" ? "products" : "";
+    html = replaceBlock(html, "BAR", bar(active), file);
     html = replaceBlock(html, "FOOTER", footer(), file);
     if (file === "index.html") {
       html = replaceBlock(html, "ORG-JSONLD", orgJsonLd(), file);

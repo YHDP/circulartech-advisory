@@ -105,19 +105,53 @@
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
+<!--SITE:BAR-->
+<nav class="ctf-nav" id="nav" aria-label="Site">
+  <div class="ctf-inner ctf-nav__inner">
+    <a class="ctf-nav__logo" href="/" aria-current="page"><img src="/assets/logo.svg" alt="CircularTech Advisory home" width="87" height="76"></a>
+    <div class="ctf-nav__links" id="navLinks">
+        <a href="/services.html">Services</a>
+        <a href="/products.html">Products <span class="ctf-nav__soon">Soon</span></a>
+        <a href="/insights/">Insights</a>
+        <span class="ctf-nav__sep ctf-nav__sep--mobile" aria-hidden="true"></span>
+        <a href="https://circulartechforum.de/" rel="noopener">CircularTech Forum <span aria-hidden="true">&#8599;</span></a>
+        <div class="ctf-nav__links-contact">
+          <button class="ctf-btn ctf-btn--primary" type="button" data-copy aria-describedby="copy-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span class="ctf-btn__label">consulting@circulartechforum.de</span>
+          </button>
+          <a class="ctf-contact__alt" href="mailto:consulting@circulartechforum.de?subject=DPP%20Consulting%20Request">or open in mail app</a>
+        </div>
+    </div>
+    <div class="ctf-nav__actions">
+      <button class="ctf-nav__menu-btn" type="button" aria-expanded="false" aria-controls="navDropdown">Menu <span class="ctf-nav__arrow" aria-hidden="true">&#9662;</span></button>
+      <div class="ctf-nav__dropdown" id="navDropdown">
+        <a href="/services.html">Services</a>
+        <a href="/products.html">Products <span class="ctf-nav__soon">Soon</span></a>
+        <a href="/insights/">Insights</a>
+        <span class="ctf-nav__sep" aria-hidden="true"></span>
+        <a href="https://circulartechforum.de/" rel="noopener">CircularTech Forum <span aria-hidden="true">&#8599;</span></a>
+      </div>
+      <div class="ctf-nav__contact">
+        <button class="ctf-nav__contact-btn" type="button" aria-expanded="false" aria-controls="navContact">Get in touch</button>
+        <div class="ctf-nav__popover" id="navContact" role="dialog" aria-label="Contact options">
+          <p>Tell us what you make and where your passport data lives today.</p>
+          <button class="ctf-btn ctf-btn--primary" type="button" data-copy aria-describedby="copy-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span class="ctf-btn__label">consulting@circulartechforum.de</span>
+          </button>
+          <a class="ctf-contact__alt" href="mailto:consulting@circulartechforum.de?subject=DPP%20Consulting%20Request">or open in mail app</a>
+        </div>
+      </div>
+      <button class="ctf-nav__toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<!--/SITE:BAR-->
 
 <header class="ctf-hero ctf-hero--home">
   <div class="ctf-hero__art" id="hero-art" data-anim="loop" aria-hidden="true"></div>
   <div class="ctf-inner">
-<!--SITE:BAR-->
-    <div class="ctf-bar">
-      <a class="ctf-bar__logo" href="/" aria-current="page"><img src="/assets/logo.svg" alt="CircularTech Advisory" width="87" height="76"></a>
-      <nav class="ctf-bar__links" aria-label="Site">
-        <a href="/insights/">Insights</a>
-        <a href="https://circulartechforum.de/" rel="noopener">circulartechforum.de &rarr;</a>
-      </nav>
-    </div>
-<!--/SITE:BAR-->
     <div class="ctf-hero__body">
       <p class="ctf-hero__pre">CircularTech Advisory</p>
       <h1 class="ctf-hero__h1">Expert <span>DPP Consulting</span> for Your Organisation</h1>
@@ -199,6 +233,7 @@
         </article>
 
       </div>
+      <p class="ctf-section__more"><a class="ctf-contact__alt" href="/services.html">What each service delivers</a></p>
     </div>
   </section>
 
@@ -262,9 +297,9 @@
   <div class="ctf-inner">
     <p>&copy; <span data-year>2026</span> CircularTech Forum GmbH</p>
     <nav aria-label="Footer">
+      <a href="/services.html">Services</a>
       <a href="/insights/">Insights</a>
       <a href="/feed.xml">RSS</a>
-      <a href="https://circulartechforum.de/" rel="noopener">CircularTech Forum</a>
       <a href="https://circulartechforum.de/privacy-policy/" rel="noopener">Privacy</a>
     </nav>
   </div>
