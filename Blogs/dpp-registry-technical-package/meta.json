@@ -27,9 +27,9 @@
     "body": "Tell us what you make and how your passport is hosted today. We tell you what is missing before 18 February 2027.",
     "subject": "DPP Registry readiness"
   },
-  "published": false,
+  "published": true,
   "review": {
-    "text": "draft",
-    "assets": "draft"
+    "text": "approved",
+    "assets": "approved"
   }
 }

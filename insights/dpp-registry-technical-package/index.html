@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>The EU DPP Registry's API and battery data model are out: what to build before February 2027 | CircularTech Advisory</title>
+<meta name="description" content="Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.">
+<meta name="theme-color" content="#161616">
+<link rel="canonical" href="https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CircularTech Advisory">
+<meta property="og:title" content="The EU DPP Registry's API and battery data model are out: what to build before February 2027 | CircularTech Advisory">
+<meta property="og:description" content="Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.">
+<meta property="og:url" content="https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/">
+<meta property="og:image" content="https://www.circulartechadvisory.com/assets/images/og-default.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="CircularTech Advisory insights" href="/feed.xml">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<meta property="article:published_time" content="2026-11-05">
+<meta property="article:modified_time" content="2026-11-05">
+<meta name="author" content="Yvo Hunink de Paiva">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/#article",
+      "headline": "The EU DPP Registry's API and battery data model are out: what to build before February 2027",
+      "description": "Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.",
+      "image": "https://www.circulartechadvisory.com/assets/images/og-default.png",
+      "datePublished": "2026-11-05",
+      "dateModified": "2026-11-05",
+      "inLanguage": "en",
+      "wordCount": 3138,
+      "articleSection": [
+        "EU DPP Registry",
+        "Batteries"
+      ],
+      "keywords": "DPP, DPP Registry, Battery Regulation, API, JSON Schema, SHACL",
+      "author": {
+        "@type": "Person",
+        "name": "Yvo Hunink de Paiva",
+        "url": "https://www.regenstudio.world/",
+        "sameAs": [
+          "https://www.regenstudio.world/"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.circulartechadvisory.com/#org",
+        "name": "CircularTech Advisory",
+        "legalName": "CircularTech Forum GmbH",
+        "logo": "https://www.circulartechadvisory.com/assets/logo.svg"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/"
+      },
+      "isPartOf": {
+        "@id": "https://www.circulartechadvisory.com/#website"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".ctf-hero__h1",
+          ".ctf-hero__sub"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.circulartechadvisory.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Insights",
+          "item": "https://www.circulartechadvisory.com/insights/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "The EU DPP Registry's API and battery data model are out: what to build before February 2027",
+          "item": "https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="ctf-hero ctf-hero--compact">
+  <div class="ctf-inner">
+    <div class="ctf-bar">
+      <a class="ctf-bar__logo" href="/"><img src="/assets/logo.svg" alt="CircularTech Advisory" width="87" height="76"></a>
+      <nav class="ctf-bar__links" aria-label="Site">
+        <a href="/insights/" aria-current="page">Insights</a>
+        <a href="https://circulartechforum.de/" rel="noopener">circulartechforum.de &rarr;</a>
+      </nav>
+    </div>
+    <div class="ctf-hero__body">
+      <nav class="ctf-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/insights/">Insights</a></nav>
+      <p class="ctf-hero__pre">Insight · EU DPP Registry</p>
+      <h1 class="ctf-hero__h1">The EU DPP Registry's API and battery data model are out: <span>what to build before February 2027</span></h1>
+      <p class="ctf-hero__sub">On 30 October 2026 the Commission published the Registry API, its authentication rules and the first semantic model, for batteries. Here is what a battery maker has to build now, and why a successful battery registration is not yet confirmed.</p>
+      <p class="ctf-hero__meta"><strong>Yvo Hunink de Paiva</strong>, CircularTech Advisory · <time datetime="2026-11-05">5 November 2026</time> · 14 min read</p>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="ctf-article">
+  <article class="ctf-inner ctf-prose">
+<p>If you place electric-vehicle batteries, light-transport (LMT) batteries or industrial batteries above 2 kWh on the EU market, each battery needs a Digital Product Passport registered in the EU DPP Registry from <strong>18 February 2027</strong>, under the Battery Regulation. On <strong>30 October 2026</strong> the Commission published the technical rules for registering them by machine, on its <a href="https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/resources-documentation_en" target="_blank" rel="noopener">DPP resources page</a>: a registration API, the way your systems and your passport server must authenticate, and the first semantic data model, which covers batteries only.</p>
+
+<div class="ctf-note">
+  <h4>The short version</h4>
+  <ul>
+    <li><strong>Build now.</strong> Your passport is a JSON document on your own server, checked against the Commission's published schemas, and registered through the web interface or the new API.</li>
+    <li><strong>Start with the seal.</strong> Registering requires a verified organisation, and verification requires a qualified electronic seal held on a qualified device.</li>
+    <li><strong>Do not count on it working yet.</strong> The newest User Guide still says battery registrations are not available, and no Commission text says they now succeed.</li>
+  </ul>
+</div>
+
+<p>When the Registry went live in July, two gaps remained: no API for operators, and no battery data model. This package closes most of both. Quotes below are verbatim from the Commission's texts.</p>
+
+<h2 id="whats-in-the-package">What the package contains</h2>
+
+<p>Six documents are new. Two others on the same page were updated in the weeks before.</p>
+
+<ul>
+  <li><strong>API Integration Guide</strong> for economic operators, plus the <strong>OpenAPI specifications</strong> (OpenAPI 3.1, version 1.0.0): how a system submits registrations.</li>
+  <li><strong>Service Account Technical Integration Guide</strong>: how your systems log in to that API.</li>
+  <li><strong>Self-Hosted Authentication Guide</strong>: how your passport server recognises the Registry when it asks for the protected part of a passport.</li>
+  <li><strong>Semantic Data Guide</strong>, plus the <strong>Semantic Data Artifacts</strong>: the code lists, validation rules and schemas for the core passport and for batteries.</li>
+  <li>Updated: the <strong>User Guide for Economic Operators v1.03</strong> (last published 16 September 2026; the resources page labels it "v3"), and the Digital Batteries Passport <strong>data points by category v3.2</strong> (19 October 2026).</li>
+</ul>
+
+<h2 id="data-standards">Which data standards the model uses</h2>
+
+<p>A short glossary first. SKOS is a format for code lists, SHACL a language for validation rules, RDF the underlying data model, and JSON-LD a way to give ordinary JSON keys a shared meaning. The table lists the W3C standards that appear in the published files and the role each one plays.</p>
+
+<div class="ctf-table-wrap">
+<table class="ctf-table">
+  <thead>
+    <tr><th>Standard</th><th>What the package does with it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>SKOS</td><td>The master data. Every field and every code is a concept in one of 17 concept schemes.</td></tr>
+    <tr><td>SHACL</td><td>The master rules. 19 shape files; the guide states that the other schemas are generated from them.</td></tr>
+    <tr><td>RDF</td><td>The data model underneath, published as Turtle files.</td></tr>
+    <tr><td>JSON-LD</td><td>Five contexts that map plain JSON keys to vocabulary terms, layered core to product group to sub-group.</td></tr>
+    <tr><td>SPARQL</td><td>Only inside SHACL shapes, for checks such as code-list membership. There is no query endpoint.</td></tr>
+    <tr><td>XSD</td><td>Used for datatypes. The guide describes XML Schemas, but the archive contains no .xsd file.</td></tr>
+    <tr><td>OWL</td><td>Version metadata only (ontology IRI, version IRI, version info). No classes, properties or axioms.</td></tr>
+    <tr><td>DCAT</td><td>Announced. The guide says the repository "will publish" a DCAT-AP 3.0.1 catalogue. It is not in the package.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>SKOS, SHACL, RDF and JSON-LD carry the model; SPARQL, XSD and OWL have supporting roles; DCAT is announced for later. Registration itself uses plain JSON. Section 2.1 of the Semantic Data Guide is explicit: <em>"The registration process will be requesting JSON data format, as it is the only mandatory data format in accordance with EN 18216:2026."</em> That JSON is checked with a <strong>JSON Schema</strong> (draft 2020-12, a specification that does not come from the W3C), which the Commission generates from the SHACL shapes. The shapes check the same passport when it is expressed as JSON-LD or RDF.</p>
+
+<p>In the published files the generated schemas check less than the shapes they come from. A battery shape requires a specific unit for each field, volts for a voltage for example, where the JSON Schema accepts any unit from the code list. The shapes also require item-level registration for batteries and block the fields a battery sub-group excludes; the JSON Schemas do neither. A passport can therefore pass the JSON Schema and still fail the shapes. The API guide does not say which check the Registry runs on the passport it fetches, so test against both until the Commission says.</p>
+
+<div class="ctf-note">
+  <h4>Two details for passport system builders</h4>
+  <p>Every passport declares which releases it was built against, in a field called <code>contentSpecificationIds</code>: at least a core release and a product release, plus the sub-group where one applies. And language tags must carry a region: <code>en-IE</code> passes, <code>en</code> fails.</p>
+  <p>Licensing is the other one, and it is simpler than it looks. The Commission publishes the 17 vocabularies and the API specifications under the open-source licence EUPL-1.2, and the Implementing Regulation makes the semantic repository free to use (Article 12(7) of Regulation (EU) 2026/1778). You can build against these files and validate your passports with them without asking anyone. The shapes, schemas and contexts carry no licence statement yet, so if you ship copies inside your own product, keep the Commission's source reference with them.</p>
+</div>
+
+<h2 id="api">Registering through the API</h2>
+
+<p>The API is small, and its rules need careful reading. It has five operations: list the valid product groups, submit a registration, and three calls on the Activity Dashboard (the Registry's task log) to follow a submission and read the per-item results. There is no operation to read, update or withdraw a registration, and verification of your organisation stays a manual step in the web interface.</p>
+
+<p>One submission registers up to 100 passports at once. Each item in it is one passport with its own UPI, and all items share one product group. A submission is at most 10 MB, in JSON only. For batteries the request must name a sub-group. The OpenAPI file shows <code>EV</code> and the guide shows <code>LMT</code>, while the data model calls its sub-groups evb, ind and lmt, and nothing maps the one onto the other, so ask the Registry for the valid list at runtime. Registration is all or nothing: if one passport in the batch fails, none of them is registered.</p>
+
+<figure>
+  <img src="submission.svg" alt="One submission holds up to 100 passports of one product group, each with its own UPI. The Registry fetches and checks every passport. If all pass, all are registered, each with its own registration identifier; if one fails, none is registered." width="680" height="560" loading="lazy">
+  <figcaption>One submission, up to 100 passports: all are registered, or none is.</figcaption>
+</figure>
+
+<p>Since the July go-live, the limit on the Unique Product Identifier (UPI), the web address of your passport, has grown to <strong>2,000 characters</strong>. The Registry also does more than store a record: it fetches your live passport at the UPI and validates it. So your DPP must be hosted, and reachable at its UPI, before you register it.</p>
+
+<h2 id="authentication">Authentication runs in both directions</h2>
+
+<p>The package defines two separate login arrangements, one for each direction. They are easy to mix up, so here they are named by who is calling whom.</p>
+
+<h3 id="auth-service-account">1. Your system calls the Registry: the service account</h3>
+
+<p>This one matters only if you register through the API. An administrator of your verified organisation creates a service account in the Registry (at most five per organisation) and uploads the public half of a key pair. Your system proves who it is by signing a short message with the private half, which never leaves your systems, and gets back an access pass that is valid for 15 minutes. Only elliptic-curve keys are accepted and shared passwords are not supported. A few details differ from what common software libraries do by default, so give your developer the Service Account guide itself rather than a summary.</p>
+
+<figure>
+  <img src="service-account.svg" alt="Logging in to the Registry API: your system holds the private key, sends a signed message to the Commission login service, gets back an access pass valid for 15 minutes, and calls the Registry API with that pass. Set up once: an administrator creates the service account and uploads the public key. Only needed for the API; in the web portal you log in yourself." width="680" height="490" loading="lazy">
+  <figcaption>Direction 1: your system logs in with a service account, then registers.</figcaption>
+</figure>
+
+<h3 id="auth-self-hosted">2. The Registry calls your server: the protected part of the passport</h3>
+
+<p>Your passport has a public part and a protected part. When you register, the Registry first opens your passport like any visitor and reads the public part. It then asks again, this time carrying a short-lived pass signed by the Commission, and your server checks that pass before it hands over the protected part. No pass means the public part. A pass that fails the check means a refusal, never the public part instead. A website made of fixed files cannot run that check; it needs a small program on the server, or a passport provider who does it for you.</p>
+
+<figure>
+  <img src="protected-part.svg" alt="A request without a pass gets only the public part of the passport. The Registry's request with a valid Commission pass gets the public and the protected part. A request with a wrong, expired or misdirected pass is refused with error 401 or 403, never with the public part: the Registry already has that from its first call." width="680" height="530" loading="lazy">
+  <figcaption>Direction 2: what your server returns when the Registry asks for the passport.</figcaption>
+</figure>
+
+<h3 id="auth-tiers">Two levels today, more later</h3>
+
+<p>For now there are only two levels, public and protected, and the Registry is the only caller that may see the protected part. Batteries need more. Following Annex XIII of the Battery Regulation, the battery data model sorts every data point into four access groups: public data; data for persons with a legitimate interest, notified bodies, market surveillance authorities and the Commission; data for notified bodies, market surveillance authorities and the Commission only; and data on an individual battery for persons with a legitimate interest. No published procedure yet lets anyone in the last three groups fetch their part from your server.</p>
+
+<figure>
+  <img src="battery-access-groups.svg" alt="Who may see which battery access group: everyone sees group 1 (items 1 to 45). Persons with a legitimate interest, such as repairers, recyclers and second-life operators, see groups 1, 2 and 4 but not group 3, the test reports. Authorities (notified bodies, market surveillance, the Commission) see groups 1, 2 and 3 but not group 4, the data on one specific battery. Today groups 2 to 4 have no published way to reach the operator's server." width="680" height="682" loading="lazy">
+  <figcaption>The battery data model's four access groups, after Annex XIII of the Battery Regulation and the Commission's data-points guidance v3.2.</figcaption>
+</figure>
+
+<p>For other product groups the rules will come product by product. The Ecodesign Regulation leaves who may read or update which data to each product's delegated act (Article 9(2) of Regulation (EU) 2024/1781), and Article 11 lets the Commission set procedures for the digital credentials of those who have access rights. The self-hosted guide adds only that identifying operators by their unique operator identifier will come in a future version. Nothing published says yet how other callers will reach the protected part.</p>
+
+<h3 id="auth-standards">How this relates to the European DPP standards</h3>
+
+<p>Both guides cite only internet standards from the IETF. Neither refers to EN 18239 or EN 18246, the CEN/CENELEC standards on access rights and on data authentication, and the Implementing Regulation does not refer to them either. They work at different levels. The guides set up trust between the Registry and an operator's server. EN 18239 deals with who else may read or change controlled data, from authorities to repairers, and EN 18246 with signing data so that both the data and its issuer can be verified. Where they meet they agree: public data needs no login, and a failed check gets an error. The strong identity check the standards ask for does exist in the Registry, but one step earlier, when your organisation is verified with a qualified seal or signature (Articles 4 and 5 of Regulation (EU) 2026/1778). Neither standard is cited in the Official Journal yet; the Commission's <a href="https://single-market-economy.ec.europa.eu/single-market/goods/european-standards/harmonised-standards/digital-product-passport-dpp_en" target="_blank" rel="noopener">list of harmonised DPP standards</a> will show when they are.</p>
+
+<h2 id="user-guide">What changed in the User Guide</h2>
+
+<p>Verification became stricter: your seal must sit on a qualified device, such as a smart card or USB token, or come from a qualified remote-signing service, and a certificate stored as a software file is rejected. If you have not yet bought a seal, check which kind you are buying.</p>
+
+<h2 id="batteries">Batteries: model published, registration not confirmed</h2>
+
+<div class="ctf-note ctf-note--warn">
+  <h4>Two facts that do not yet line up</h4>
+  <p>The battery data model is now published. Yet the User Guide, updated six weeks earlier, still says battery registrations are "not currently available", and no Commission text says they now work. Test a registration before you rely on it.</p>
+</div>
+
+<p>Batteries remain the only product group the Registry accepts, at item level only. Detergents, construction products, textiles and the ESPR groups have no published semantic model.</p>
+
+<h2 id="questions-for-policy-makers">Some questions to policy makers</h2>
+
+<p>Reading the battery data model next to the Commission's guidance on battery data points (v3.2, which says it is not an official Commission position), four points left us unsure. We may well be misreading them, so we put them as questions.</p>
+
+<div class="ctf-table-wrap">
+<table class="ctf-table">
+  <thead>
+    <tr><th>Data point</th><th>The guidance</th><th>The data model</th><th>Our question</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Critical raw materials</td><td>Refers to Annex X(1) of the Battery Regulation</td><td>Lists the materials of the Critical Raw Materials Act</td><td>Which list should a battery passport use?</td></tr>
+    <tr><td>Temperature range for voltage values</td><td>"When relevant"</td><td>Always required</td><td>How does a passport say that a range is not relevant?</td></tr>
+    <tr><td>Separate-collection marking</td><td>Yes or no</td><td>Only "yes" accepted</td><td>Is a "no" meant to be impossible?</td></tr>
+    <tr><td>Rated capacity</td><td>A repetition, not to be filled</td><td>A field of its own</td><td>Should operators fill it or leave it empty?</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>The second and third matter for anyone building today, because a passport that follows the guidance could fail the data model's checks. If you work on these texts and can tell us the intended reading, we would be glad to hear it.</p>
+
+<h2 id="what-to-do">What economic operators will have to do, batteries already before February 2027</h2>
+
+<p>Every product group with a passport obligation will go through the same steps once its rules apply. For batteries they are due before 18 February 2027. Our order of work:</p>
+
+<ol>
+  <li><strong>Get verified with the right seal.</strong> A qualified electronic seal (QSeal) is a company's legally recognised digital stamp; a sole trader uses a qualified signature (QES) instead. Buy it from a provider on an EU trusted list, held on a qualified device or used through a remote-signing service, and apply it in PAdES, the standard format for signatures inside a PDF. Buying one takes time, so start here.</li>
+  <li><strong>Host the passport before you register it.</strong> The Registry fetches it, so the UPI has to resolve over HTTPS to valid JSON that declares its <code>contentSpecificationIds</code>.</li>
+  <li><strong>Validate against both JSON Schema and SHACL</strong> for your sub-group, until the Commission states which one the Registry applies. Any JSON Schema 2020-12 validator and an open-source SHACL validator such as pySHACL will do; this is a job for your developer or passport provider.</li>
+  <li><strong>Build the protected endpoint to the guide</strong>: the public view for anonymous requests, 401 on any invalid token with no fallback, origin-exact audience checks, and 403 unless the requesting organisation's identifier matches your policy byte for byte.</li>
+  <li><strong>Set up the service account</strong> if you will use the API. Keep the key in a hardware module if you can, and plan the rotation: two active credentials at a time, each valid for at most two years.</li>
+</ol>
+
+<p>Because batteries register per item, the numbers add up fast. The web interface takes one passport per form, or up to 100 per uploaded file, all or nothing. At tens of thousands of batteries a year, that is hundreds of all-or-nothing uploads, so plan for the API. Hosting is needed either way, because the Registry fetches your passport when you register it, and so is the protected endpoint for any battery data that is not public.</p>
+
+<h2 id="how-we-help">How CircularTech Advisory helps</h2>
+
+<p>We take battery makers and their suppliers from the regulation to a passport the Registry will accept. A readiness assessment shows which of your data already covers the 71 battery data points and which of your systems can host and protect a passport. The compliance roadmap puts the seal, the hosting, the validation and the API work in order against 18 February 2027. If you want to know whether your current setup would pass the Registry's checks, that is a conversation we can have this month.</p>
+
+<p>We also help DPP service providers plan the systems their customers will need to meet the Registry's rules.</p>
+
+<div class="ctf-sources">
+  <p><strong>Sources</strong>: European Commission, DPP resources and documentation page (technical package of 30 October 2026): API Integration Guide for Economic Operators v1.0 and OpenAPI specifications 1.0.0; Service Account Technical Integration Guide v1.0; Self-Hosted Authentication Guide for Economic Operators v1.0; Semantic Data Guide v1.0 and Semantic Data Artifacts (core 1.0.0, batteries 1.0.0); DPP Registry User Guide for Economic Operators v1.03 (16 September 2026); Guidance Document: Digital Batteries Passport, data points by category v3.2 (19 October 2026). Commission Implementing Regulation (EU) 2026/1778; Regulation (EU) 2023/1542 (Batteries).</p>
+</div>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<div class="ctf-faq ctf-faq--post">
+  <details class="ctf-faq__item">
+    <summary>Does the EU DPP Registry have an API now?</summary>
+    <div class="ctf-faq__answer"><p>Yes. Since 30 October 2026 the Commission publishes an API Integration Guide and OpenAPI specifications. The API has five operations: list product groups, submit a registration of 1 to 100 items (JSON only, at most 10 MB), and three Activity Dashboard calls to follow the task and read per-item results. Systems authenticate with a service account using OAuth 2.0 private_key_jwt.</p></div>
+  </details>
+  <details class="ctf-faq__item">
+    <summary>Which data format does DPP registration require?</summary>
+    <div class="ctf-faq__answer"><p>JSON. The Semantic Data Guide states that the registration process requests JSON, the only mandatory format under EN 18216:2026. JSON is validated with JSON Schema; JSON-LD and RDF are validated with SHACL. XML is accepted only on the web interface's file-upload path.</p></div>
+  </details>
+  <details class="ctf-faq__item">
+    <summary>Which W3C standards does the DPP semantic model use?</summary>
+    <div class="ctf-faq__answer"><p>SKOS, SHACL, RDF and JSON-LD carry the model, SPARQL appears only inside SHACL shapes, XSD is used for datatypes without published .xsd files, OWL only for version metadata, and the DCAT-AP catalogue is announced but not yet published. Registration requests JSON, for which the Commission publishes JSON Schemas (draft 2020-12, not a W3C standard); it does not say whether the Registry validates with those schemas or with the SHACL shapes.</p></div>
+  </details>
+  <details class="ctf-faq__item">
+    <summary>Can you register a battery passport now?</summary>
+    <div class="ctf-faq__answer"><p>Not confirmed. The battery semantic model was published on 30 October 2026, but the User Guide v1.03 still states that battery registrations are not available, and no Commission text yet says they succeed. Batteries are the only product group the Registry accepts, at item level. The passport obligation applies from 18 February 2027 to EV and LMT batteries and to industrial batteries above 2 kWh.</p></div>
+  </details>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Does the EU DPP Registry have an API now?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Since 30 October 2026 the Commission publishes an API Integration Guide and OpenAPI specifications. The API has five operations: list product groups, submit a registration of 1 to 100 items (JSON only, at most 10 MB), and three Activity Dashboard calls to follow the task and read per-item results. Systems authenticate with a service account using OAuth 2.0 private_key_jwt." } },
+    { "@type": "Question", "name": "Which data format does DPP registration require?", "acceptedAnswer": { "@type": "Answer", "text": "JSON. The Semantic Data Guide states that the registration process requests JSON, the only mandatory format under EN 18216:2026. JSON is validated with JSON Schema; JSON-LD and RDF are validated with SHACL. XML is accepted only on the web interface's file-upload path." } },
+    { "@type": "Question", "name": "Which W3C standards does the DPP semantic model use?", "acceptedAnswer": { "@type": "Answer", "text": "SKOS, SHACL, RDF and JSON-LD carry the model, SPARQL appears only inside SHACL shapes, XSD is used for datatypes without published .xsd files, OWL only for version metadata, and the DCAT-AP catalogue is announced but not yet published. Registration requests JSON, for which the Commission publishes JSON Schemas (draft 2020-12, not a W3C standard); it does not say whether the Registry validates with those schemas or with the SHACL shapes." } },
+    { "@type": "Question", "name": "Can you register a battery passport now?", "acceptedAnswer": { "@type": "Answer", "text": "Not confirmed. The battery semantic model was published on 30 October 2026, but the User Guide v1.03 still states that battery registrations are not available, and no Commission text yet says they succeed. Batteries are the only product group the Registry accepts, at item level. The passport obligation applies from 18 February 2027 to EV and LMT batteries and to industrial batteries above 2 kWh." } }
+  ]
+}
+</script>
+  </article>
+</main>
+
+<section class="ctf-cta" aria-labelledby="cta-h2">
+  <div class="ctf-inner">
+    <h2 class="ctf-cta__h2" id="cta-h2">Will your battery passport pass the Registry's checks?</h2>
+    <p class="ctf-cta__body">Tell us what you make and how your passport is hosted today. We tell you what is missing before 18 February 2027.</p>
+    <button class="ctf-btn ctf-btn--dark" type="button" data-copy aria-describedby="copy-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <span class="ctf-btn__label">consulting@circulartechforum.de</span>
+    </button>
+    <p class="ctf-cta__email">or <a href="mailto:consulting@circulartechforum.de?subject=DPP%20Registry%20readiness">open in your mail app</a></p>
+  </div>
+</section>
+
+<footer class="ctf-footer">
+  <div class="ctf-inner">
+    <p>&copy; <span data-year>2026</span> CircularTech Forum GmbH</p>
+    <nav aria-label="Footer">
+      <a href="/insights/">Insights</a>
+      <a href="/feed.xml">RSS</a>
+      <a href="https://circulartechforum.de/" rel="noopener">CircularTech Forum</a>
+      <a href="https://circulartechforum.de/privacy-policy/" rel="noopener">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<p class="visually-hidden" id="copy-hint">Copies the email address to your clipboard.</p>
+<p class="visually-hidden" id="copy-status" role="status" aria-live="polite"></p>
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

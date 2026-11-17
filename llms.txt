@@ -9,7 +9,7 @@ Contact: consulting@circulartechforum.de. Language: English. Full text of this s
 - [Insights](https://www.circulartechadvisory.com/insights/): analysis of EU DPP rules and what to build when
 
 ## Insights
-- None published yet.
+- [The EU DPP Registry's API and battery data model are out: what to build before February 2027](https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/) (2026-11-05): Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.
 
 ## Related
 - [CircularTech Forum](https://circulartechforum.de/): the forum and community behind CircularTech Advisory
