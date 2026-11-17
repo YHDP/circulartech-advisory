@@ -1,0 +1,62 @@
+# CircularTech Advisory: full text
+
+> Plain-text version of https://www.circulartechadvisory.com for language models. Source of truth is the website; quote with a link to the page.
+
+
+---
+
+## Home (https://www.circulartechadvisory.com/)
+
+What we do
+
+## Five ways we help
+
+### DPP Readiness Assessment
+
+Which passport rules apply to your products, which data you already hold, and what is missing.
+
+### Compliance Roadmapping
+
+The work in order against your deadline: data, systems, registration and the people who own each step.
+
+### DPP Design & Implementation
+
+A passport architecture that fits your supply chain, built with your IT team or your passport provider.
+
+### Circular Business Value
+
+Repair, resale and take-back models that the passport data makes possible, with a business case for each.
+
+### Custom Consulting
+
+Advice for sector-specific questions that do not fit a standard package.
+
+Insights
+
+## Latest analysis
+
+[All insights](/insights/)
+
+Questions
+
+## Digital Product Passports in short
+
+**Q: What is a Digital Product Passport?**
+
+A Digital Product Passport is a structured data record about a product, reached through a data carrier such as a QR code. EU product rules make it mandatory product group by product group. It carries the information that authorities, repairers, recyclers and buyers need, such as composition, origin and how to repair or recycle the product.
+
+**Q: Which products need a passport, and from when?**
+
+Batteries come first: electric-vehicle batteries, light-transport batteries and industrial batteries above 2 kWh need a passport from 18 February 2027 under the Battery Regulation. Other groups follow once the Commission adopts their delegated acts under the Ecodesign for Sustainable Products Regulation. Its first working plan names textiles, furniture, mattresses, tyres, iron and steel, and aluminium. Until a product group has its delegated act, there is no passport date for it.
+
+**Q: Where does a company start?**
+
+With a readiness assessment. It shows which passport rules apply to your products and when, which of the required data you already hold, and which systems have to host, protect and register the passport. The compliance roadmap then puts that work in order against your deadline.
+
+## Ready to Start Your DPP Journey?
+
+Whether you're preparing for mandatory DPPs, evaluating circular investments or designing your implementation roadmap, we help you move from uncertainty to clarity.
+
+consulting@circulartechforum.de
+
+or [open in your mail app](mailto:consulting@circulartechforum.de?subject=DPP%20Consulting%20Request)

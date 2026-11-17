@@ -1,0 +1,15 @@
+# CircularTech Advisory
+
+> CircularTech Advisory is the Digital Product Passport (DPP) consulting practice of CircularTech Forum GmbH, the organiser of the CircularTech Forum. It helps manufacturers, institutions and passport service providers in the EU move from passport rules to a working passport: readiness assessments, compliance roadmaps, passport design and implementation, and circular business value.
+
+Contact: consulting@circulartechforum.de. Language: English. Full text of this site for language models: https://www.circulartechadvisory.com/llms-full.txt
+
+## Pages
+- [Home](https://www.circulartechadvisory.com/): services, short answers on what a DPP is and which products need one, and how to get in touch
+- [Insights](https://www.circulartechadvisory.com/insights/): analysis of EU DPP rules and what to build when
+
+## Insights
+- None published yet.
+
+## Related
+- [CircularTech Forum](https://circulartechforum.de/): the forum and community behind CircularTech Advisory

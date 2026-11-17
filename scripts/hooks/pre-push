@@ -1,0 +1,94 @@
+#!/bin/bash
+# Pre-push guard for circulartech-advisory (GitHub Pages serves main, so a push to main publishes).
+# Adapted from regenstudio-website/scripts/hooks/pre-push: checks 1, 2, 3, 5, 6 and 12 of that hook.
+# Install once per clone: ./scripts/hooks/install.sh
+#
+#  1  no external scripts, stylesheets or @imports in pages
+#  2  no network calls from site JavaScript (fetch, XHR, beacons, sockets)
+#  3  no secret-shaped strings or private keys
+#  5  no .env files
+#  6  review gate on main: every post in Blogs/ is approved before it reaches main, and every
+#     generated insights/<slug>/ belongs to an approved post; no _preview/ in the tree
+# 12  CSS braces balance
+set -uo pipefail
+
+fail=0
+err() { echo "pre-push: $*" >&2; fail=1; }
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ "$local_sha" = "0000000000000000000000000000000000000000" ] && continue   # branch deletion
+  tmp="$(mktemp -d)"
+  git archive "$local_sha" | tar -x -C "$tmp"
+
+  # 1 external resources in pages
+  if grep -rEn --include='*.html' '<script[^>]+src="(https?:)?//|<link[^>]+rel="stylesheet"[^>]+href="(https?:)?//|@import[^;]*(https?:)?//' "$tmp" >/dev/null; then
+    err "check 1: external script/stylesheet found:"
+    grep -rEn --include='*.html' '<script[^>]+src="(https?:)?//|<link[^>]+rel="stylesheet"[^>]+href="(https?:)?//|@import[^;]*(https?:)?//' "$tmp" | sed "s#$tmp/##" >&2
+  fi
+  if grep -rEn --include='*.css' '@import[^;]*(https?:)?//|url\((["'"'"'])?(https?:)?//' "$tmp" >/dev/null; then
+    err "check 1: external resource in CSS"
+  fi
+
+  # 2 network calls from site JS
+  if [ -d "$tmp/assets/js" ] && grep -rEn 'fetch\(|XMLHttpRequest|sendBeacon|new WebSocket|EventSource' "$tmp/assets/js" >/dev/null; then
+    err "check 2: network call in assets/js (this site has no backend):"
+    grep -rEn 'fetch\(|XMLHttpRequest|sendBeacon|new WebSocket|EventSource' "$tmp/assets/js" | sed "s#$tmp/##" >&2
+  fi
+
+  # 3 secrets
+  if grep -rEn -I '([A-Z0-9]_(KEY|SECRET|TOKEN|PASSWORD))[[:space:]]*[=:][[:space:]]*["'"'"'][^"'"'"']{16,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.' "$tmp" >/dev/null; then
+    err "check 3: secret-shaped string:"
+    grep -rEln -I '([A-Z0-9]_(KEY|SECRET|TOKEN|PASSWORD))[[:space:]]*[=:][[:space:]]*["'"'"'][^"'"'"']{16,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.' "$tmp" | sed "s#$tmp/##" >&2
+  fi
+
+  # 5 env files
+  if find "$tmp" -name '.env*' | grep -q .; then err "check 5: .env file in the tree"; fi
+
+  # 6 review gate (main only: that is what Pages serves)
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    [ -d "$tmp/_preview" ] && err "check 6: _preview/ is in the tree (drafts must not be published)"
+    python3 - "$tmp" <<'PY' || fail=1
+import json, os, sys
+root = sys.argv[1]
+bad = []
+approved = set()
+blogs = os.path.join(root, "Blogs")
+if os.path.isdir(blogs):
+    for slug in sorted(os.listdir(blogs)):
+        meta = os.path.join(blogs, slug, "meta.json")
+        if not os.path.isfile(meta):
+            continue
+        m = json.load(open(meta, encoding="utf-8"))
+        r = m.get("review") or {}
+        if m.get("published") is True and r.get("text") == "approved" and r.get("assets") == "approved":
+            approved.add(slug)
+        else:
+            bad.append(f"Blogs/{slug}: not approved (published={m.get('published')}, review={r}); keep drafts off main")
+out = os.path.join(root, "insights")
+if os.path.isdir(out):
+    for slug in sorted(os.listdir(out)):
+        if os.path.isdir(os.path.join(out, slug)) and slug not in approved:
+            bad.append(f"insights/{slug}/ is generated but its post is not approved")
+for slug in approved:
+    if not os.path.isfile(os.path.join(out, slug, "index.html")):
+        bad.append(f"insights/{slug}/index.html missing: run the build before pushing")
+for b in bad:
+    print("pre-push: check 6: " + b, file=sys.stderr)
+sys.exit(1 if bad else 0)
+PY
+  fi
+
+  # 12 CSS braces
+  while IFS= read -r css; do
+    o=$(tr -cd '{' < "$css" | wc -c); c=$(tr -cd '}' < "$css" | wc -c)
+    [ "$o" -eq "$c" ] || err "check 12: unbalanced braces in ${css#$tmp/} ({=$o }=$c)"
+  done < <(find "$tmp" -name '*.css' -not -path '*/fonts/*')
+
+  rm -rf "$tmp"
+done
+
+if [ "$fail" -ne 0 ]; then
+  echo "pre-push: blocked. Fix the issues above; do not bypass with --no-verify." >&2
+  exit 1
+fi
+exit 0

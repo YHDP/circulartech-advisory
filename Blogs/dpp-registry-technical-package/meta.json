@@ -1,0 +1,35 @@
+{
+  "title": "The EU DPP Registry's API and battery data model are out: what to build before February 2027",
+  "slug": "dpp-registry-technical-package",
+  "subtitle": "On 30 October 2026 the Commission published the Registry API, its authentication rules and the first semantic model, for batteries. Here is what a battery maker has to build now, and why a successful battery registration is not yet confirmed.",
+  "author": {
+    "name": "Yvo Hunink de Paiva",
+    "role": "CircularTech Advisory",
+    "url": "https://www.regenstudio.world/"
+  },
+  "date": "2026-11-05",
+  "categories": [
+    "EU DPP Registry",
+    "Batteries"
+  ],
+  "tags": [
+    "DPP",
+    "DPP Registry",
+    "Battery Regulation",
+    "API",
+    "JSON Schema",
+    "SHACL"
+  ],
+  "excerpt": "Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.",
+  "metaDescription": "Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.",
+  "cta": {
+    "h2": "Will your battery passport pass the Registry's checks?",
+    "body": "Tell us what you make and how your passport is hosted today. We tell you what is missing before 18 February 2027.",
+    "subject": "DPP Registry readiness"
+  },
+  "published": false,
+  "review": {
+    "text": "draft",
+    "assets": "draft"
+  }
+}

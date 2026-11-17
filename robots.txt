@@ -1,0 +1,66 @@
+# robots.txt for www.circulartechadvisory.com
+
+User-agent: *
+Allow: /
+Disallow: /Blogs/
+Disallow: /_preview/
+Disallow: /404.html
+
+# AI search and citation bots: explicitly allowed
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /Blogs/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /Blogs/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /Blogs/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /Blogs/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /Blogs/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /Blogs/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /Blogs/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /Blogs/
+
+# AI training-only crawlers: blocked (high crawl, no citation benefit)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: claude-web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# AI-readable content: see /llms.txt and /llms-full.txt
+Sitemap: https://www.circulartechadvisory.com/sitemap.xml
+Sitemap: https://www.circulartechadvisory.com/feed.xml

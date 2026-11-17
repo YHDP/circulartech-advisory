@@ -1,0 +1,26 @@
+name: IndexNow
+
+# Tells Bing, Yandex and the other IndexNow engines which pages changed, after each push to main.
+# Adapted from regenstudio-website/.github/workflows/indexnow.yml. The key file sits in the site root.
+on:
+  push:
+    branches: [main]
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          KEY="b454942504196d7ae3887d0c96115815"
+          HOST="www.circulartechadvisory.com"
+          URLS=$(grep -oP '<loc>\K[^<]+' sitemap.xml)
+          URL_JSON=$(echo "$URLS" | jq -R -s 'split("\n") | map(select(length > 0))')
+          echo "Submitting $(echo "$URLS" | wc -l) URLs to IndexNow..."
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\": \"$HOST\", \"key\": \"$KEY\", \"keyLocation\": \"https://$HOST/$KEY.txt\", \"urlList\": $URL_JSON}"
+          echo ""
+          echo "IndexNow submission complete."
