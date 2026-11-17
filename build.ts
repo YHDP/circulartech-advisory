@@ -526,7 +526,7 @@ Contact: ${EMAIL}. Language: English. Full text of this site for language models
 
 ## Pages
 - [Home](${SITE_URL}/): services, short answers on what a DPP is and which products need one, and how to get in touch
-- [Services](${SITE_URL}/services.html): the five services in detail, what each delivers and when it fits
+- [Services](${SITE_URL}/services.html): the six services in detail, what each delivers and when it fits
 - [Insights](${SITE_URL}/${OUT_DIR}/): analysis of EU DPP rules and what to build when
 ${LEGAL_CONFIRMED ? `- [Impressum](${SITE_URL}/impressum.html): legal notice (German)\n- [Datenschutz](${SITE_URL}/datenschutz.html): privacy notice (German)\n` : ""}
 ## Insights

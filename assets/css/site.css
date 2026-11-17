@@ -162,34 +162,24 @@ img, svg { max-width: 100%; }
 .ctf-section__more a:hover { color: var(--mint); }
 
 /* ── Services ─────────────────────────────────────────────── */
-/* Five cards: one row on wide screens, 3 + 2 on tablets, one column on phones. Never a lone card. */
-.ctf-previews {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+/* Lander: the services wheel (locked lab c10). Segments and labels link to services.html; phones get the list. */
+.ctf-wheel-wrap { max-width: 1040px; margin: 8px auto 0; }
+.ctf-wheel { display: block; width: 100%; height: auto; font-family: "Poppins", system-ui, sans-serif; }
+.ctf-wheel .kw text, .ctf-wheel .arc path { transition: fill 0.2s ease, opacity 0.2s ease; }
+.ctf-wheel .kw:hover text, .ctf-wheel .kw:focus-visible text { fill: var(--mint); }
+.ctf-wheel .arc:hover path { opacity: 1; }
+.ctf-wheel a:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; }
+.ctf-svc-list { display: none; }
+@media (max-width: 760px) {
+  .ctf-wheel-wrap { display: none; }
+  .ctf-svc-list { display: grid; gap: 10px; list-style: none; padding: 0; margin: 0; counter-reset: svc; }
+  .ctf-svc-list li { counter-increment: svc; }
+  .ctf-svc-list a { display: flex; gap: 14px; align-items: baseline; padding: 16px 18px; background: var(--ink-3);
+    border-radius: 10px; color: #fff; font-weight: 600; font-size: 16px; }
+  .ctf-svc-list a::before { content: "0" counter(svc); font-size: 12px; letter-spacing: 0.15em; color: var(--amber); }
+  .ctf-svc-list li:nth-child(n+3) a::before { color: var(--sky); }
+  .ctf-svc-list li:nth-child(n+5) a::before { color: var(--mint); }
 }
-@media (max-width: 1100px) {
-  .ctf-previews { grid-template-columns: repeat(6, 1fr); }
-  .ctf-preview { grid-column: span 2; }
-  .ctf-preview:nth-child(n+4) { grid-column: span 3; }
-}
-@media (max-width: 640px) {
-  .ctf-previews { grid-template-columns: 1fr; }
-  .ctf-preview, .ctf-preview:nth-child(n+4) { grid-column: auto; }
-}
-.ctf-preview {
-  background: var(--ink-3); border-radius: 10px; padding: 22px 18px;
-  border-left: 3px solid var(--teal);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.ctf-preview:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-.ctf-preview--readiness { border-left-color: var(--amber-hi); }
-.ctf-preview--compliance { border-left-color: var(--amber); }
-.ctf-preview--design { border-left-color: var(--sky); }
-.ctf-preview--circular { border-left-color: var(--mint); }
-.ctf-preview svg { width: 32px; height: 32px; margin-bottom: 12px; }
-.ctf-preview__title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.3; }
-.ctf-preview__desc { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
 
 /* ── Insight cards ────────────────────────────────────────── */
 .ctf-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
@@ -344,6 +334,7 @@ img, svg { max-width: 100%; }
   border-radius: 16px; border-left: 3px solid var(--teal); scroll-margin-top: 110px; }
 .ctf-service--readiness, .ctf-service--compliance { border-left-color: var(--amber); }
 .ctf-service--design { border-left-color: var(--sky); }
+.ctf-service--supplier { border-left-color: #4FB3D9; }
 .ctf-service--circular { border-left-color: var(--mint); }
 .ctf-service__icon svg { width: 48px; height: 48px; }
 .ctf-service__h2 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 12px; }

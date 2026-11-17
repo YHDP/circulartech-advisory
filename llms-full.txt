@@ -9,29 +9,21 @@
 
 What we do
 
-## Five ways we help
+## Six ways we help
 
-### DPP Readiness Assessment
+- [Compliance readiness assessment](/services.html#readiness)
 
-Which passport rules apply to your products, which data you already hold, and what is missing.
+- [Roadmap and strategy](/services.html#roadmap)
 
-### Compliance Roadmapping
+- [Supplier and software selection](/services.html#supplier)
 
-The work in order against your deadline: data, systems, registration and the people who own each step.
+- [Passport design and implementation](/services.html#design)
 
-### DPP Design & Implementation
+- [Business value beyond compliance](/services.html#value)
 
-A passport architecture that fits your supply chain, built with your IT team or your passport provider.
+- [Custom advice](/services.html#custom)
 
-### Circular Business Value
-
-Repair, resale and take-back models that the passport data makes possible, with a business case for each.
-
-### Custom Consulting
-
-Advice for sector-specific questions that do not fit a standard package.
-
-[What each service delivers](/services.html)
+[See all services](/services.html)
 
 Insights
 
@@ -67,7 +59,7 @@ or [open in your mail app](mailto:consulting@circulartechforum.de?subject=DPP%20
 
 ## Services (https://www.circulartechadvisory.com/services.html)
 
-## DPP Readiness Assessment
+## Compliance Readiness Assessment
 
 A readiness assessment answers three questions: which passport rules apply to your products and from when, which of the required data you already hold, and which of your systems would have to host, protect and register the passport.
 
@@ -83,7 +75,7 @@ A readiness assessment answers three questions: which passport rules apply to yo
 
 **A good fit when** you know a passport is coming but not yet what it asks of you.
 
-## Compliance Roadmapping
+## Roadmap and Strategy
 
 The roadmap puts the passport work in order against your deadline, with an owner for each step.
 
@@ -99,7 +91,23 @@ The roadmap puts the passport work in order against your deadline, with an owner
 
 **A good fit when** your deadline is fixed, as it is for batteries on 18 February 2027, or the readiness assessment is done.
 
-## DPP Design & Implementation
+## Supplier and Software Selection
+
+A passport platform, a traceability tool or a data service binds you for years. We run the selection with you, so the choice rests on your requirements and not on the best demo.
+
+### What you get
+
+- A question set built from your passport requirements and your current systems
+
+- A scoring matrix agreed before the first vendor answers
+
+- The answers checked, with a right of reply for vendors on the points that decide
+
+- A recommendation with the reasons and the risks written out
+
+**A good fit when** you are about to buy a passport platform, a data tool or a service, and the offers are hard to compare.
+
+## Passport Design and Implementation
 
 We design the passport with your IT team or your passport provider and stay through the build, until a passport passes the Registry's checks.
 
@@ -115,7 +123,7 @@ We design the passport with your IT team or your passport provider and stay thro
 
 **A good fit when** you are building a passport system or choosing who builds it.
 
-## Circular Business Value
+## Business Value Beyond Compliance
 
 Passport data makes repair, resale and take-back easier to run. We work out which of those models pay off for your products.
 
@@ -129,7 +137,7 @@ Passport data makes repair, resale and take-back easier to run. We work out whic
 
 **A good fit when** you want the passport to earn something back, not only to tick a box.
 
-## Custom Consulting
+## Custom Advice
 
 Some questions do not fit a package: a sector-specific rule, a passport requirement in a tender, a data dispute with a supplier, or a second opinion on a provider's offer.
 
