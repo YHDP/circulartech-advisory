@@ -31,5 +31,7 @@
   "review": {
     "text": "approved",
     "assets": "approved"
-  }
+  },
+  "featuredImage": "Header.webp",
+  "featuredImageAlt": "A passport card inside a loop, with the words: EU DPP Registry, registering a battery passport."
 }

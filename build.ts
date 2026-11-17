@@ -217,7 +217,7 @@ function titleHtml(title: string): string {
 
 function card(p: Post): string {
   const img = p.featuredImage
-    ? `<img class="ctf-card__img" src="/${OUT_DIR}/${p.slug}/${p.featuredImage}" alt="${esc(p.featuredImageAlt || "")}" width="800" height="450" loading="lazy">\n      `
+    ? `<img class="ctf-card__img" src="/${OUT_DIR}/${p.slug}/${p.featuredImage}" alt="${esc(p.featuredImageAlt || "")}" width="1600" height="1000" loading="lazy">\n      `
     : "";
   return `    <a class="ctf-card" href="/${OUT_DIR}/${p.slug}/">
       ${img}<div class="ctf-card__body">
@@ -310,15 +310,20 @@ ${head({ title: `${p.seoTitle || p.title} | ${SITE_NAME}`, description: desc, ur
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<header class="ctf-hero ctf-hero--compact">
+<header class="ctf-hero ctf-hero--compact ctf-hero--post">
+  <div class="ctf-hero__art" data-anim="drift" aria-hidden="true"></div>
   <div class="ctf-inner">
 ${bar("insights")}
+    <div class="ctf-hero__grid${p.featuredImage ? "" : " ctf-hero__grid--solo"}">
     <div class="ctf-hero__body">
       <nav class="ctf-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/${OUT_DIR}/">Insights</a></nav>
       <p class="ctf-hero__pre">Insight${p.categories?.length ? " · " + esc(p.categories[0]) : ""}</p>
       <h1 class="ctf-hero__h1">${titleHtml(p.title)}</h1>
       ${p.subtitle ? `<p class="ctf-hero__sub">${esc(p.subtitle)}</p>` : ""}
       <p class="ctf-hero__meta"><strong>${esc(p.author.name)}</strong>${p.author.role ? ", " + esc(p.author.role) : ""} · <time datetime="${p.date}">${fmtDate(p.date)}</time>${updated} · ${minutes} min read</p>
+      ${(p.tags || []).length ? `<ul class="ctf-tags" aria-label="Topics">${p.tags!.slice(0, 5).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
+    </div>
+    ${p.featuredImage ? `<figure class="ctf-hero__figure"><img src="${p.featuredImage}" alt="${esc(p.featuredImageAlt || "")}" width="1600" height="1000"></figure>` : ""}
     </div>
   </div>
 </header>
@@ -339,6 +344,7 @@ ${p.content.trim()}
 
 ${footer()}
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/hero-anim.js" defer></script>
 </body>
 </html>
 `;
@@ -377,6 +383,7 @@ ${head({ title: `Insights | ${SITE_NAME}`, description: desc, url, type: "websit
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="ctf-hero ctf-hero--compact">
+  <div class="ctf-hero__art" data-anim="drift" aria-hidden="true"></div>
   <div class="ctf-inner">
 ${bar("insights")}
     <div class="ctf-hero__body">
@@ -396,6 +403,7 @@ ${cards(posts)}
 
 ${footer()}
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/hero-anim.js" defer></script>
 </body>
 </html>
 `;
