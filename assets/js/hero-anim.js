@@ -68,7 +68,9 @@
       layout: function (w, h) {
         if (w < 900) return { off: true };
         var r = rng(21), cw = Math.min(w * .2, h * .44);
-        var P = passport(w * .78 - cw / 2, h * .52 - cw * .66, cw, r, [16, 11, 14, 9, 13]);
+        // align the outer lane with the right edge of the page content (.ctf-inner: 1140px max, 40px padding)
+        var contentRight = (w + Math.min(w, 1140)) / 2 - 40, g0 = cw / 22;
+        var P = passport(contentRight - cw - g0 * 3.4 - 6, h * .52 - cw * .66, cw, r, [16, 11, 14, 9, 13]);
         P.pts.forEach(function (q) { q.d = r(); q.s0 = r(); });
         var lanes = [0, 1, 2, 3].map(function (i) {
           var dots = [];
