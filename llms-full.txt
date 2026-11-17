@@ -59,6 +59,40 @@ or [open in your mail app](mailto:consulting@circulartechforum.de?subject=DPP%20
 
 ## Services (https://www.circulartechadvisory.com/services.html)
 
+Overview
+
+## Six services on one loop
+
+Most clients go round the loop in this order: find out where they stand, plan the work, choose the tools, build the passport, then use its data for more than compliance. Each service also works on its own. Select one to jump to it.
+
+- [Compliance readiness assessment](/services.html#readiness)
+
+- [Roadmap and strategy](/services.html#roadmap)
+
+- [Supplier and software selection](/services.html#supplier)
+
+- [Passport design and implementation](/services.html#design)
+
+- [Business value beyond compliance](/services.html#value)
+
+- [Custom advice](/services.html#custom)
+
+Where to start
+
+## Which service fits?
+
+- [You know a passport is coming, but not what it asks of youCompliance readiness assessment](#readiness)
+
+- [Your deadline is set and the work needs an order and ownersRoadmap and strategy](#roadmap)
+
+- [You are about to buy a passport platform, a data tool or a serviceSupplier and software selection](#supplier)
+
+- [You are building the passport, or someone is building it for youPassport design and implementation](#design)
+
+- [You want the passport data to earn something backBusiness value beyond compliance](#value)
+
+- [You have one concrete questionCustom advice](#custom)
+
 ## Compliance Readiness Assessment
 
 A readiness assessment answers three questions: which passport rules apply to your products and from when, which of the required data you already hold, and which of your systems would have to host, protect and register the passport.
@@ -72,6 +106,22 @@ A readiness assessment answers three questions: which passport rules apply to yo
 - A check of your systems: hosting, access to the protected part, and registration
 
 - The first three steps, in order
+
+### Questions it answers
+
+- Which passport rules apply to our products, and from when?
+
+- Which of the required data do we already hold, and who holds the rest?
+
+- Which of our systems would have to change?
+
+### Often includes
+
+- Mapping of the EU rules for each product group
+
+- Data-gap scan against the required data points
+
+- Short interviews with your own teams and key suppliers
 
 **A good fit when** you know a passport is coming but not yet what it asks of you.
 
@@ -89,6 +139,22 @@ The roadmap puts the passport work in order against your deadline, with an owner
 
 - A timeline your management can sign off
 
+### Questions it answers
+
+- What do we do first, and what can wait?
+
+- Who owns each step, inside and outside the company?
+
+- What do we need from our suppliers, and when?
+
+### Often includes
+
+- A register of requirements with the source for each
+
+- Templates for supplier data agreements
+
+- A workshop to agree the plan with management
+
 **A good fit when** your deadline is fixed, as it is for batteries on 18 February 2027, or the readiness assessment is done.
 
 ## Supplier and Software Selection
@@ -104,6 +170,22 @@ A passport platform, a traceability tool or a data service binds you for years. 
 - The answers checked, with a right of reply for vendors on the points that decide
 
 - A recommendation with the reasons and the risks written out
+
+### Questions it answers
+
+- Which platform fits our systems and our budget?
+
+- How do we compare offers that describe the same thing differently?
+
+- What do we lock ourselves into?
+
+### Often includes
+
+- A scan of the providers that fit your case
+
+- The question set and scoring matrix
+
+- A scoring session with your team
 
 **A good fit when** you are about to buy a passport platform, a data tool or a service, and the offers are hard to compare.
 
@@ -121,6 +203,22 @@ We design the passport with your IT team or your passport provider and stay thro
 
 - Registration through the web interface or the API, and help choosing a provider if you buy
 
+### Questions it answers
+
+- What goes in our passport, and who keeps each data point up to date?
+
+- Where is it hosted, and who may see the protected part?
+
+- Which data carrier suits the product: QR code, NFC or RFID?
+
+### Often includes
+
+- Data model and IT architecture
+
+- Data carrier choice and tests on the product
+
+- A prototype passport, and a pilot on a real product with training for your team
+
 **A good fit when** you are building a passport system or choosing who builds it.
 
 ## Business Value Beyond Compliance
@@ -135,6 +233,22 @@ Passport data makes repair, resale and take-back easier to run. We work out whic
 
 - A business case per model, with the assumptions written out
 
+### Questions it answers
+
+- Which repair, resale or take-back model fits our product?
+
+- Which of that data do we already collect for compliance?
+
+- What is it worth?
+
+### Often includes
+
+- Choice of circular model
+
+- Advice on the footprint method (LCA, PEF) where a model needs one
+
+- A business case with the assumptions written out
+
 **A good fit when** you want the passport to earn something back, not only to tick a box.
 
 ## Custom Advice
@@ -147,7 +261,63 @@ Some questions do not fit a package: a sector-specific rule, a passport requirem
 
 - A short call to walk through it with your team
 
+### Questions it answers
+
+- Does this rule apply to us?
+
+- Is this offer from a passport provider reasonable?
+
+- What should our sector ask of the Commission?
+
+### Often includes
+
+- Expert and stakeholder interviews
+
+- A position paper for a sector body
+
+- A second opinion on a plan or an offer
+
 **A good fit when** you have one concrete question and want a clear answer.
+
+How we work
+
+## From a first call to a handover
+
+-
+### A first conversation
+You tell us what you make, which markets you sell in and where your product data lives today. We tell you which service fits, or that you do not need us yet.
+
+-
+### A written scope
+We put the questions, the deliverables, the time and the price on paper before any work starts.
+
+-
+### Work in short rounds
+We work with your team and review each result with you before the next step. Your people learn the work as it is done.
+
+-
+### A clean handover
+You get the documents, data models and files in formats you can keep using, with or without us.
+
+Questions
+
+## About our services
+
+**Q: Do I need all six services?**
+
+No. Each service works on its own. Most clients start with the readiness assessment, because it shows which of the others they need.
+
+**Q: Do you build the passport software?**
+
+We design the passport and stay with your IT team or your passport provider through the build, until a passport passes the Registry&#x27;s checks. For tests we build prototypes; the production system is built and run by you or your provider.
+
+**Q: Which rules do you work with?**
+
+The Ecodesign for Sustainable Products Regulation and the product rules adopted under it, the Battery Regulation, and the EU Digital Product Passport Registry. For a sector rule we have not worked with yet, we say so before we start.
+
+**Q: Can we start with one question?**
+
+Yes. That is what custom advice is for: a scoped answer to one question, with the sources behind it.
 
 ## Not sure where to start?
 

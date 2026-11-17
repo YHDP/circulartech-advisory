@@ -349,3 +349,26 @@ img, svg { max-width: 100%; }
   .ctf-service { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 24px; }
   .ctf-service__h2 { font-size: 22px; }
 }
+
+/* ── Services page: overview, fit guide, extras, steps ─────── */
+.ctf-section__intro { max-width: 760px; color: var(--text-dim); font-size: 16px; line-height: 1.7; margin: -8px 0 8px; }
+.ctf-fit { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-width: 980px; }
+.ctf-fit__row { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; align-items: center;
+  padding: 16px 22px; background: var(--ink-3); border-radius: 10px; color: rgba(255,255,255,0.85); transition: background 0.2s ease; }
+.ctf-fit__row:hover { background: var(--ink-4); }
+.ctf-fit__then { font-weight: 600; color: #fff; }
+.ctf-fit__then::before { content: "\2192\00a0 "; color: var(--amber); }
+.ctf-fit__row:hover .ctf-fit__then { color: var(--mint); }
+.ctf-service__list--q li { color: rgba(255,255,255,0.82); }
+.ctf-service__tags { list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-wrap: wrap; gap: 8px; }
+.ctf-service__tags li { font-size: 13px; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; padding: 5px 12px; }
+.ctf-steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; counter-reset: step; }
+.ctf-steps__item { counter-increment: step; padding: 24px 20px; background: var(--ink-3); border-radius: 12px; border-top: 3px solid var(--teal); }
+.ctf-steps__item::before { content: "0" counter(step); display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.15em; color: var(--amber); margin-bottom: 10px; }
+.ctf-steps__h3 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.ctf-steps__item p { font-size: 14.5px; line-height: 1.65; color: var(--text-dim); }
+@media (max-width: 1024px) { .ctf-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .ctf-steps { grid-template-columns: minmax(0, 1fr); }
+  .ctf-fit__row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}
