@@ -202,13 +202,13 @@ function loadPosts(includeDrafts = false): Post[] {
     }
     const content = read(`${dir}/content.html`);
     const words = toMarkdown(content).split(/\s+/).length;
-    posts.push({ ...meta, content, words });
+    posts.push({ ...meta, featuredImage: meta.featuredImage || HERO_FILE, content, words });
   }
   return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 const postUrl = (p: Meta) => `${SITE_URL}/${OUT_DIR}/${p.slug}/`;
-const postImage = (p: Meta) => (p.featuredImage ? `${postUrl(p)}${p.featuredImage}` : OG_DEFAULT);
+const postImage = (p: Meta) => (p.featuredImage && !p.featuredImage.endsWith(".svg") ? `${postUrl(p)}${p.featuredImage}` : OG_DEFAULT);  // social cards need a raster image
 
 function titleHtml(title: string): string {
   const i = title.indexOf(": ");
@@ -311,22 +311,27 @@ ${head({ title: `${p.seoTitle || p.title} | ${SITE_NAME}`, description: desc, ur
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="ctf-hero ctf-hero--compact ctf-hero--post">
-  <div class="ctf-hero__art" data-anim="drift" aria-hidden="true"></div>
   <div class="ctf-inner">
 ${bar("insights")}
-    <div class="ctf-hero__grid${p.featuredImage ? "" : " ctf-hero__grid--solo"}">
-    <div class="ctf-hero__body">
-      <nav class="ctf-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/${OUT_DIR}/">Insights</a></nav>
-      <p class="ctf-hero__pre">Insight${p.categories?.length ? " · " + esc(p.categories[0]) : ""}</p>
-      <h1 class="ctf-hero__h1">${titleHtml(p.title)}</h1>
-      ${p.subtitle ? `<p class="ctf-hero__sub">${esc(p.subtitle)}</p>` : ""}
-      <p class="ctf-hero__meta"><strong>${esc(p.author.name)}</strong>${p.author.role ? ", " + esc(p.author.role) : ""} · <time datetime="${p.date}">${fmtDate(p.date)}</time>${updated} · ${minutes} min read</p>
-      ${(p.tags || []).length ? `<ul class="ctf-tags" aria-label="Topics">${p.tags!.slice(0, 5).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
-    </div>
-    ${p.featuredImage ? `<figure class="ctf-hero__figure"><img src="${p.featuredImage}" alt="${esc(p.featuredImageAlt || "")}" width="1600" height="1000"></figure>` : ""}
+    <div class="ctf-post-header">
+      <a class="ctf-post-header__back" href="/${OUT_DIR}/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Insights</a>
+      ${(p.categories || []).length ? `<div class="ctf-post-header__categories">${p.categories!.map((c) => `<span class="ctf-post-header__category">${esc(c)}</span>`).join("")}</div>` : ""}
+      <h1 class="ctf-hero__h1 ctf-post-header__title">${titleHtml(p.title)}</h1>
+      ${p.subtitle ? `<p class="ctf-hero__sub ctf-post-header__subtitle">${esc(p.subtitle)}</p>` : ""}
+      <div class="ctf-post-header__meta">
+        <div class="ctf-post-header__author"><span class="ctf-post-header__author-name">${esc(p.author.name)}</span>${p.author.role ? `<span class="ctf-post-header__author-role">${esc(p.author.role)}</span>` : ""}</div>
+        <div class="ctf-post-header__divider"></div>
+        <div class="ctf-post-header__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <time datetime="${p.date}">${fmtDate(p.date)}</time>${updated}</div>
+        <div class="ctf-post-header__divider"></div>
+        <div class="ctf-post-header__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${minutes} min read</div>
+      </div>
     </div>
   </div>
 </header>
+${p.featuredImage ? `
+<section class="ctf-post-image">
+  <div class="ctf-inner"><img src="${p.featuredImage}" alt="${esc(p.featuredImageAlt || "")}" width="1600" height="1000"></div>
+</section>` : ""}
 
 <main id="main-content" class="ctf-article">
   <article class="ctf-inner ctf-prose">
@@ -527,7 +532,49 @@ function updateStaticPages(posts: Post[]) {
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
+// ── Insight hero art ─────────────────────────────────────────
+// CircularTech's own header style for insights: flow lines that converge on one point (the subject of the
+// post), a block of data points beside it and an amber marker. Seeded by the slug, so each post gets its own
+// composition in the same style. Used when meta.json names no featuredImage; written as hero.svg.
+const HERO_FILE = "hero.svg";
+function heroSvg(slug: string): string {
+  let seed = [...slug].reduce((a, c) => (Math.imul(a, 31) + c.charCodeAt(0)) | 0, 7);
+  const r = () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const W = 1600, H = 1000, N = 36;
+  const px = W * (0.56 + r() * 0.16), py = H * (0.4 + r() * 0.2);
+  const f1 = 1.2 + r() * 1.4, f2 = 2.6 + r() * 2.2, p1 = r() * 6.28, p2 = r() * 6.28;
+  const mix = (a: number[], b: number[], k: number) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
+  const MINT = [167, 246, 170], TEAL = [135, 225, 203], SKY = [102, 204, 236];
+  const lines: string[] = [];
+  for (let i = 0; i < N; i++) {
+    const u = (i + 0.5) / N, y0 = H * (-0.08 + 1.16 * u), pts: string[] = [];
+    for (let x = -20; x <= W + 20; x += 16) {
+      const d = (x - px) / W, pinch = Math.exp(-(d * d) / 0.018);
+      const wave = (1 - pinch) * (34 * Math.sin((x / W) * Math.PI * 2 * f1 + p1 + u * 2.2) + 14 * Math.sin((x / W) * Math.PI * 2 * f2 + p2 - u * 3));
+      const y = py + (y0 - py) * (1 - 0.86 * pinch) + wave;
+      pts.push(`${x.toFixed(0)},${y.toFixed(1)}`);
+    }
+    const c = u < 0.5 ? mix(MINT, TEAL, u * 2) : mix(TEAL, SKY, (u - 0.5) * 2);
+    const op = (0.22 + 0.58 * (1 - Math.abs(u - 0.5) * 2)).toFixed(2);
+    lines.push(`<polyline points="${pts.join(" ")}" stroke="rgb(${c.join(",")})" stroke-opacity="${op}"/>`);
+  }
+  const dots: string[] = [], gx = px + W * 0.07, gy = py - H * 0.3;
+  for (let a = 0; a < 9; a++) for (let b = 0; b < 12; b++) if (r() > 0.42)
+    dots.push(`<circle cx="${(gx + b * 24).toFixed(0)}" cy="${(gy + a * 24).toFixed(0)}" r="2.4" fill-opacity="${(0.25 + 0.5 * (1 - b / 12)).toFixed(2)}"/>`);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+<defs><radialGradient id="g" cx="${(px / W).toFixed(3)}" cy="${(py / H).toFixed(3)}" r="0.55"><stop offset="0" stop-color="#66CCEC" stop-opacity="0.22"/><stop offset="1" stop-color="#161616" stop-opacity="0"/></radialGradient></defs>
+<rect width="${W}" height="${H}" fill="#161616"/><rect width="${W}" height="${H}" fill="url(#g)"/>
+<g fill="none" stroke-width="1.6">${lines.join("")}</g>
+<g fill="#87E1CB">${dots.join("")}</g>
+<circle cx="${px.toFixed(0)}" cy="${py.toFixed(0)}" r="22" fill="none" stroke="#D4922A" stroke-opacity="0.55" stroke-width="1.5"/>
+<circle cx="${px.toFixed(0)}" cy="${py.toFixed(0)}" r="8" fill="#D4922A"/>
+</svg>
+`;
+}
+
 function copyPostAssets(slug: string, dest: string) {
+  if (!JSON.parse(read(`${BLOG_DIR}/${slug}/meta.json`)).featuredImage) Deno.writeTextFileSync(`${dest}/${HERO_FILE}`, heroSvg(slug));
   for (const e of Deno.readDirSync(`${BLOG_DIR}/${slug}`)) {
     if (e.isFile && !/\.(json|html|md)$/i.test(e.name)) Deno.copyFileSync(`${BLOG_DIR}/${slug}/${e.name}`, `${dest}/${e.name}`);
   }
@@ -561,6 +608,7 @@ function main() {
   }
   for (const p of posts) {
     const dest = `${OUT_DIR}/${p.slug}`;
+    if (exists(dest)) Deno.removeSync(dest, { recursive: true });   // no stale assets from earlier builds
     Deno.mkdirSync(dest, { recursive: true });
     copyPostAssets(p.slug, dest);
     Deno.writeTextFileSync(`${dest}/index.html`, postPage(p));
