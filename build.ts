@@ -126,7 +126,7 @@ function bar(active: Active): string {
           <a class="ctf-contact__alt" href="mailto:${EMAIL}?subject=DPP%20Consulting%20Request">or open in mail app</a>`;
   return `<nav class="ctf-nav" id="nav" aria-label="Site">
   <div class="ctf-inner ctf-nav__inner">
-    <a class="ctf-nav__logo" href="/"${cur("home")}><img src="/assets/logo.svg" alt="${SITE_NAME} home" width="87" height="76"></a>
+    <a class="ctf-nav__logo" href="/"${cur("home")}><img src="/assets/logo-advisory.svg" alt="${SITE_NAME} home" width="87" height="76"></a>
     <div class="ctf-nav__links" id="navLinks">
         ${links(" ctf-nav__sep--mobile")}
         <div class="ctf-nav__links-contact">
@@ -181,7 +181,7 @@ function orgJsonLd(): string {
         "name": SITE_NAME,
         "legalName": LEGAL_NAME,
         "url": `${SITE_URL}/`,
-        "logo": `${SITE_URL}/assets/logo.svg`,
+        "logo": `${SITE_URL}/assets/logo-advisory.svg`,
         "image": OG_DEFAULT,
         "email": EMAIL,
         "description": "Digital Product Passport consulting: readiness assessments, compliance roadmaps, passport design and implementation, and circular business value.",
@@ -282,7 +282,7 @@ function head(o: { title: string; description: string; url: string; type: string
 <meta property="og:image" content="${o.image}">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="${SITE_NAME} insights" href="/feed.xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/assets/css/site.css">${o.extra ? "\n" + o.extra : ""}`;
@@ -316,7 +316,7 @@ function postPage(p: Post, opts: { robots?: string } = {}): string {
         "articleSection": p.categories || [],
         "keywords": (p.tags || []).join(", "),
         "author": { "@type": "Person", "name": p.author.name, ...(p.author.url ? { "url": p.author.url, "sameAs": [p.author.url] } : {}) },
-        "publisher": { "@type": "Organization", "@id": ORG_ID, "name": SITE_NAME, "legalName": LEGAL_NAME, "logo": `${SITE_URL}/assets/logo.svg` },
+        "publisher": { "@type": "Organization", "@id": ORG_ID, "name": SITE_NAME, "legalName": LEGAL_NAME, "logo": `${SITE_URL}/assets/logo-advisory.svg` },
         "mainEntityOfPage": { "@type": "WebPage", "@id": url },
         "isPartOf": { "@id": `${SITE_URL}/#website` },
         "speakable": { "@type": "SpeakableSpecification", "cssSelector": [".ctf-hero__h1", ".ctf-hero__sub"] },
