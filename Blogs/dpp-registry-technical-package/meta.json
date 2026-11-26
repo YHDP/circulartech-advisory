@@ -1,13 +1,14 @@
 {
-  "title": "The EU DPP Registry's API and battery data model are out: what to build before February 2027",
+  "title": "Battery passports and the EU DPP Registry: what the 30 October technical package means for your build",
   "slug": "dpp-registry-technical-package",
-  "subtitle": "On 30 October 2026 the Commission published the Registry API, its authentication rules and the first semantic model, for batteries. Here is what a battery maker has to build now, and why a successful battery registration is not yet confirmed.",
+  "subtitle": "The Commission has published a registration API, two authentication profiles and a battery data model for the EU DPP Registry. This is the work plan for battery makers ahead of 18 February 2027, and the reason a successful battery registration still needs testing.",
   "author": {
     "name": "Yvo Hunink de Paiva",
     "role": "CircularTech Advisory",
     "url": "https://www.regenstudio.world/"
   },
   "date": "2026-11-05",
+  "updated": "2026-11-26",
   "categories": [
     "EU DPP Registry",
     "Batteries"
@@ -20,8 +21,8 @@
     "JSON Schema",
     "SHACL"
   ],
-  "excerpt": "Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.",
-  "metaDescription": "Battery passports must be registered from 18 February 2027. The Commission's 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.",
+  "excerpt": "From 18 February 2027, EV, LMT and industrial batteries need a passport whose identifier reaches the EU DPP Registry. The Commission's technical package of 30 October 2026 brings an API, service-account and server-side authentication, and a semantic model for batteries. Here is what to build first.",
+  "metaDescription": "From 18 February 2027, EV, LMT and industrial batteries need a passport whose identifier reaches the EU DPP Registry. The Commission's technical package of 30 October 2026 brings an API, service-account and server-side authentication, and a semantic model for batteries. Here is what to build first.",
   "cta": {
     "h2": "Will your battery passport pass the Registry's checks?",
     "body": "Tell us what you make and how your passport is hosted today. We tell you what is missing before 18 February 2027.",

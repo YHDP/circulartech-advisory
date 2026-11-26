@@ -7,12 +7,12 @@
     <language>en</language>
     <atom:link href="https://www.circulartechadvisory.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>The EU DPP Registry&apos;s API and battery data model are out: what to build before February 2027</title>
+      <title>Battery passports and the EU DPP Registry: what the 30 October technical package means for your build</title>
       <link>https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/</link>
       <guid isPermaLink="true">https://www.circulartechadvisory.com/insights/dpp-registry-technical-package/</guid>
       <pubDate>Thu, 05 Nov 2026 08:00:00 GMT</pubDate>
       <author>consulting@circulartechforum.de (Yvo Hunink de Paiva)</author>
-      <description>Battery passports must be registered from 18 February 2027. The Commission&apos;s 30 October 2026 technical package for the EU DPP Registry adds a registration API, two authentication profiles and a semantic model for batteries. What to build now.</description>
+      <description>From 18 February 2027, EV, LMT and industrial batteries need a passport whose identifier reaches the EU DPP Registry. The Commission&apos;s technical package of 30 October 2026 brings an API, service-account and server-side authentication, and a semantic model for batteries. Here is what to build first.</description>
     </item>
   </channel>
 </rss>
